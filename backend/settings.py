@@ -75,8 +75,12 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'smart_task_db',
+        'USER': 'smart_task_user',
+        'PASSWORD': '1234qwer',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
