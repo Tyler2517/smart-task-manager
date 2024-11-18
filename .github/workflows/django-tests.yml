@@ -45,22 +45,22 @@ jobs:
 
     - name: Run migrations
       env:
-        POSTGRES_DB: github_test
-        POSTGRES_USER: github
-        POSTGRES_PASSWORD: github
-        POSTGRES_HOST: localhost
-        POSTGRES_PORT: 5432
+        DB_NAME: github_test
+        DB_USER: github
+        DB_PASSWORD: github
+        DB_HOST: localhost
+        DB_PORT: 5432
       run: |
         source env/bin/activate
         python manage.py migrate
 
     - name: Run tests
       env:
-        POSTGRES_DB: github_test
-        POSTGRES_USER: github
-        POSTGRES_PASSWORD: github
-        POSTGRES_HOST: localhost
-        POSTGRES_PORT: 5432
+        DB_NAME: github_test
+        DB_USER: github
+        DB_PASSWORD: github
+        DB_HOST: localhost
+        DB_PORT: 5432
       run: |
         source env/bin/activate
         python manage.py test
