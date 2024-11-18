@@ -45,14 +45,22 @@ jobs:
 
     - name: Run migrations
       env:
-        DATABASE_URL: "postgres://github:github@localhost:5432/github_test"
+        POSTGRES_DB: github_test
+        POSTGRES_USER: github
+        POSTGRES_PASSWORD: github
+        POSTGRES_HOST: localhost
+        POSTGRES_PORT: 5432
       run: |
         source env/bin/activate
         python manage.py migrate
 
     - name: Run tests
       env:
-        DATABASE_URL: "postgres://github:github@localhost:5432/github_test"
+        POSTGRES_DB: github_test
+        POSTGRES_USER: github
+        POSTGRES_PASSWORD: github
+        POSTGRES_HOST: localhost
+        POSTGRES_PORT: 5432
       run: |
         source env/bin/activate
         python manage.py test
