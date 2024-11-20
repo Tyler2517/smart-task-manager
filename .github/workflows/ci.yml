@@ -1,0 +1,36 @@
+name: CI - Run Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Check out the repository
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    # Step 2: Set up Node.js
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16 # Specify your Node.js version
+
+    # Step 3: Navigate to the frontend directory
+    - name: Change directory to frontend
+      run: cd frontend
+
+    # Step 4: Install dependencies
+    - name: Install dependencies
+      working-directory: ./frontend
+      run: npm install
+
+    # Step 5: Run tests
+    - name: Run tests
+      working-directory: ./frontend
+      run: npm test
