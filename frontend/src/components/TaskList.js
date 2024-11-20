@@ -39,7 +39,8 @@ const TaskList = () => {
             <ul>
                 {filteredTasks.map((task) => (
                     <li key={task.id}>
-                        {task.title} - {task.priority === 1 ? 'High' : task.priority === 2 ? 'Medium' : 'Low'}
+                        <h2>{task.title} - {task.priority === 1 ? 'High' : task.priority === 2 ? 'Medium' : 'Low'}</h2>
+                        <p>{task.description}</p>
                         <button onClick={() => handleCompleteTask(task.id)}>Complete</button>
                         <button onClick={() => handleRemoveTask(task.id)}>Remove</button>
                     </li>
