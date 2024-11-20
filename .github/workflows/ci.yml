@@ -21,10 +21,16 @@ jobs:
       with:
         node-version: 16 # Specify your Node.js version
 
-    # Step 3: Install dependencies
+    # Step 3: Navigate to the frontend directory
+    - name: Change directory to frontend
+      run: cd frontend
+
+    # Step 4: Install dependencies
     - name: Install dependencies
+      working-directory: ./frontend
       run: npm install
 
-    # Step 4: Run tests
+    # Step 5: Run tests
     - name: Run tests
+      working-directory: ./frontend
       run: npm test
