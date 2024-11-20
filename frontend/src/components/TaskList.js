@@ -5,10 +5,14 @@ const TaskList = () => {
     const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
-        axios.get('tasks/')
+        axios
+            .get('tasks/')
             .then((response) => setTasks(response.data))
-            .catch((error) => console.error(error));
+            .catch((error) => {
+                console.error('Error fetching tasks:', error); // Explicitly log the error
+            });
     }, []);
+    
 
     return (
         <div>
