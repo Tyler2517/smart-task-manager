@@ -12,15 +12,37 @@ const TaskList = () => {
                 console.error('Error fetching tasks:', error); // Explicitly log the error
             });
     }, []);
-    
+
+    const handleCompleteTask = async (taskId) => {
+        try {
+            await axios.patch(`tasks/${taskId}/`, { completed: true });
+            setTasks(tasks.filter((task) => task.id !== taskId));
+        } catch (error) {
+            console.error('Error completing task:', error);
+        }
+    };
+
+    const handleRemoveTask = async (taskId) => {
+        try {
+            await axios.delete(`tasks/${taskId}/`);
+            setTasks(tasks.filter((task) => task.id !== taskId));
+        } catch (error) {
+            console.error('Error removing task:', error);
+        }
+    };
+
+    const filteredTasks = tasks.filter((task) => !task.completed);
 
     return (
         <div>
             <h1>Tasks</h1>
             <ul>
-                {tasks.map((task) => (
+                {filteredTasks.map((task) => (
                     <li key={task.id}>
-                        {task.title} - {task.priority === 1 ? 'High' : task.priority === 2 ? 'Medium' : 'Low'}
+                        <h2>{task.title} - {task.priority === 1 ? 'High' : task.priority === 2 ? 'Medium' : 'Low'}</h2>
+                        <p>{task.description}</p>
+                        <button onClick={() => handleCompleteTask(task.id)}>Complete</button>
+                        <button onClick={() => handleRemoveTask(task.id)}>Remove</button>
                     </li>
                 ))}
             </ul>
