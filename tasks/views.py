@@ -12,5 +12,9 @@ class TaskViewSet(viewsets.ModelViewSet):
         return Task.objects.all()
 
     def perform_create(self, serializer):
-        default_user = User.objects.first()  # Use the first user in the database
+        users = User.objects.all()
+        if users:
+            default_user = users.first()
+        else:
+            default_user = User.objects.create_user(username='default', password='default')
         serializer.save(owner=default_user)
