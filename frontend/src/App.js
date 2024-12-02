@@ -2,7 +2,10 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import TaskList from './components/TaskList';
 import AddTask from './components/AddTask';
-import Navbar from './components/Navbar'; // Import the Navbar component
+import Navbar from './components/Navbar';
+import Login from './components/Login';
+import Register from './components/Register';
+import ProtectedRoute from './components/ProtectedRoute'; 
 
 function App() {
     return (
@@ -11,9 +14,26 @@ function App() {
                 <Navbar />
                 <Routes>
                     <Route path="/" element={<h1>Welcome to Smart Task Manager</h1>} />
-                    <Route path="/tasks" element={<TaskList />} />
-                    <Route path="/add-task" element={<AddTask />} />
                     <Route path="/about" element={<h1>About This Project</h1>} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/login" element={<Login />} />
+                    {/* Protected Routes */}
+                    <Route
+                        path="/tasks"
+                        element={
+                            <ProtectedRoute>
+                                <TaskList />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/add-task"
+                        element={
+                            <ProtectedRoute>
+                                <AddTask />
+                            </ProtectedRoute>
+                        }
+                    />
                 </Routes>
             </div>
         </Router>
