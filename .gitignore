@@ -16,3 +16,6 @@ media/
 
 # VS Code
 .vscode/
+
+# Docker Compose
+docker-compose.yml
