@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import axios from '../api/axios';
+import { useNavigate } from 'react-router-dom';
 
 const AddTask = () => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [priority, setPriority] = useState(1);
     const [dueDate, setDueDate] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -23,6 +25,7 @@ const AddTask = () => {
             setDescription('');
             setPriority(1);
             setDueDate('');
+            navigate('/tasks');
         } catch (error) {
             console.error('Error adding task:', error.response.data);
             alert('Failed to add task. Check the console for details.');

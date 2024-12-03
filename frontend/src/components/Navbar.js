@@ -5,10 +5,10 @@ const Navbar = () => {
     const navigate = useNavigate();
 
     // Check if user is logged in (simplified for demonstration)
-    const isLoggedIn = !!localStorage.getItem('token'); // Replace with your actual auth logic
+    const isLoggedIn = !!localStorage.getItem('accessToken'); // Replace with your actual auth logic
 
     const handleLogout = () => {
-        localStorage.removeItem('token'); // Remove the token
+        localStorage.removeItem('accessToken'); // Remove the token
         navigate('/login'); // Redirect to login
     };
 
@@ -44,14 +44,16 @@ const Navbar = () => {
                         About
                     </NavLink>
                 </li>
-                <li>
-                    <NavLink
-                        to="/register"
-                        style={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
-                    >
-                        Register
-                    </NavLink>
-                </li>
+                {!isLoggedIn && (
+                    <li>
+                        <NavLink
+                            to="/register"
+                            style={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
+                        >
+                            Register
+                        </NavLink>
+                    </li>
+                )}
                 {isLoggedIn ? (
                     <li>
                         <button style={styles.logoutButton} onClick={handleLogout}>
