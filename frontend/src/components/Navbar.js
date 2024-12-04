@@ -1,7 +1,17 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
+    const navigate = useNavigate();
+
+    // Check if user is logged in (simplified for demonstration)
+    const isLoggedIn = !!localStorage.getItem('accessToken'); // Replace with your actual auth logic
+
+    const handleLogout = () => {
+        localStorage.removeItem('accessToken'); // Remove the token
+        navigate('/login'); // Redirect to login
+    };
+
     return (
         <nav style={styles.navbar}>
             <div style={styles.navBrand}>
@@ -34,6 +44,32 @@ const Navbar = () => {
                         About
                     </NavLink>
                 </li>
+                {!isLoggedIn && (
+                    <li>
+                        <NavLink
+                            to="/register"
+                            style={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
+                        >
+                            Register
+                        </NavLink>
+                    </li>
+                )}
+                {isLoggedIn ? (
+                    <li>
+                        <button style={styles.logoutButton} onClick={handleLogout}>
+                            Logout
+                        </button>
+                    </li>
+                ) : (
+                    <li>
+                        <NavLink
+                            to="/login"
+                            style={({ isActive }) => (isActive ? styles.activeLink : styles.link)}
+                        >
+                            Login
+                        </NavLink>
+                    </li>
+                )}
             </ul>
         </nav>
     );
@@ -68,6 +104,14 @@ const styles = {
         textDecoration: 'none',
         color: 'yellow', // Active link color
         fontWeight: 'bold',
+    },
+    logoutButton: {
+        background: 'none',
+        border: 'none',
+        color: 'white',
+        cursor: 'pointer',
+        fontSize: '1rem',
+        textDecoration: 'underline',
     },
 };
 
