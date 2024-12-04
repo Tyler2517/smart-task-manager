@@ -4,7 +4,6 @@ import { MemoryRouter } from 'react-router-dom';
 import axios from '../api/axios';
 import Login from './Login';
 import Register from './Register';
-import ProtectedRoute from './ProtectedRoute';
 
 jest.mock('../api/axios');
 
