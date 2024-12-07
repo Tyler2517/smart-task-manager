@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios, { setAuthToken } from '../api/axios';
-import { redirect, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const [username, setUsername] = useState('');
