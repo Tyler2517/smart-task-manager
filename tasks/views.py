@@ -27,7 +27,6 @@ class TaskViewSet(viewsets.ModelViewSet):
 
 class RegisterUserView(APIView):
     def post(self, request):
-        print("RegisterUserView: post method called")
         username = request.data.get('username')
         password = request.data.get('password')
 
