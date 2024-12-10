@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from '../api/axios';
 import { useNavigate } from 'react-router-dom';
+import { Box, TextField, Button, Stack, Typography } from '@mui/material';
 
 const AddTask = () => {
     const [title, setTitle] = useState('');
@@ -14,9 +15,9 @@ const AddTask = () => {
         try {
             const taskData = {
                 title,
-                description,  // Include description
+                description,
                 priority,
-                due_date: dueDate,  // Include due_date
+                due_date: dueDate,
             };
 
             await axios.post('tasks/', taskData);
@@ -33,47 +34,57 @@ const AddTask = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label>Title:</label>
-                <input
-                    type="text"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    required
+        <Box sx={{ padding: 2 }}>
+          <Typography variant="h4" component="h2" sx={{ marginBottom: 2 }}>
+            Add Task
+          </Typography>
+          <form onSubmit={handleSubmit}>
+            <Stack spacing={2}>
+              <TextField
+                label="Title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                required
+              />
+              <TextField
+                label="Description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                required
+                multiline
+                rows={4}
+              />
+              <TextField
+                label="Priority"
+                value={priority}
+                onChange={(e) => setPriority(Number(e.target.value))}
+                required
+                select
+                SelectProps={{
+                  native: true,
+                }}
+              >
+                <option value={1}>High</option>
+                <option value={2}>Medium</option>
+                <option value={3}>Low</option>
+              </TextField>
+              <TextField
+                label="Due Date"
+                value={dueDate}
+                onChange={(e) => setDueDate(e.target.value)}
+                required
+                type="date"
+                InputLabelProps={{
+                    shrink: true,
+                }}
                 />
-            </div>
-            <div>
-                <label>Description:</label>
-                <textarea
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    required
-                />
-            </div>
-            <div>
-                <label>Priority:</label>
-                <select
-                    value={priority}
-                    onChange={(e) => setPriority(Number(e.target.value))}
-                >
-                    <option value={1}>High</option>
-                    <option value={2}>Medium</option>
-                    <option value={3}>Low</option>
-                </select>
-            </div>
-            <div>
-                <label>Due Date:</label>
-                <input
-                    type="date"
-                    value={dueDate}
-                    onChange={(e) => setDueDate(e.target.value)}
-                    required
-                />
-            </div>
-            <button type="submit">Add Task</button>
-        </form>
-    );
+              <Button variant="contained" type="submit">
+                Add Task
+              </Button>
+            </Stack>
+          </form>
+        </Box>
+      );
 };
 
 export default AddTask;

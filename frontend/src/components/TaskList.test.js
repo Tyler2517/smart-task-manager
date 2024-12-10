@@ -7,6 +7,7 @@ jest.mock('../api/axios', () => ({
     get: jest.fn(),
     patch: jest.fn(),
     delete: jest.fn(),
+    post: jest.fn(),
 }));
 
 beforeAll(() => {
