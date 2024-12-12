@@ -4,16 +4,16 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
 const TaskList = () => {
-    const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState([]);
 
-    useEffect(() => {
-        axios
-            .get('tasks/')
-            .then((response) => setTasks(response.data))
-            .catch((error) => {
-                console.error('Error fetching tasks:', error); // Explicitly log the error
-            });
-    }, []);
+  useEffect(() => {
+    axios
+      .get('tasks/')
+      .then((response) => setTasks(response.data))
+      .catch((error) => {
+        console.error('Error fetching tasks:', error);
+      });
+  }, []);
 
     const handleCompleteTask = async (taskId) => {
         try {

@@ -15,7 +15,7 @@ class TaskViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         # Remove owner-based filtering since authentication is removed
-        return Task.objects.all()
+        return Task.objects.filter(owner=self.request.user)
 
     def perform_create(self, serializer):
         users = User.objects.all()
@@ -27,7 +27,6 @@ class TaskViewSet(viewsets.ModelViewSet):
 
 class RegisterUserView(APIView):
     def post(self, request):
-        print("RegisterUserView: post method called")
         username = request.data.get('username')
         password = request.data.get('password')
 
