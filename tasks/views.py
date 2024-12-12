@@ -15,7 +15,7 @@ class TaskViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         # Remove owner-based filtering since authentication is removed
-        return Task.objects.all()
+        return Task.objects.filter(owner=self.request.user)
 
     def perform_create(self, serializer):
         users = User.objects.all()
